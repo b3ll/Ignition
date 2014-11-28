@@ -1,0 +1,9 @@
+Package: ca.adambell.carplayactivator
+Name: CarPlay Activator
+Depends: mobilesubstrate, firmware (>= 8.0)
+Version: 0.0.1
+Architecture: iphoneos-arm
+Description: Enables Native CarPlay Interface on any iOS Device (8.X).
+Maintainer: Adam Bell
+Author: Adam Bell
+Section: Tweaks

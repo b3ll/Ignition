@@ -1,0 +1,125 @@
+%config(generator=MobileSubstrate);
+
+#import <UIKit/UIKit.h>
+
+#import "substrate.h"
+
+#import "PrivateHeaders.h"
+
+static CGRect carplay_frame = CGRectZero;
+
+#include "RotationFixes.xm"
+
+// Temporary for now, flipswitch or preferences bundle toggle would make sense in the future.
+#define CARPLAY_ACTIVE YES
+
+%hook UIScreen
+
+- (BOOL)_isCarScreen
+{
+    return CARPLAY_ACTIVE;
+}
+
+- (UIScreen *)_carScreen
+{
+    return (CARPLAY_ACTIVE ? [UIScreen mainScreen] : %orig);
+}
+
+// I *think* this is for table view cells and buttons and such that should be larger for in the car?
+- (BOOL)_isUIElementLimited:(id)object
+{
+    return (CARPLAY_ACTIVE ? YES : %orig);
+}
+
+// Loads of places check for this to be 0x3 (which I'm assuming is an external display or carplay).
+- (NSUInteger)_userInterfaceIdiom
+{
+    return (CARPLAY_ACTIVE ? 0x3 : %orig);
+}
+
+%end
+
+%hook FBSDisplay
+
+- (BOOL)isCarDisplay
+{
+    return CARPLAY_ACTIVE;
+}
+
+- (BOOL)isAirPlayDisplay
+{
+    return !CARPLAY_ACTIVE;
+}
+
+%end
+
+%hook SpringBoard
+
+// Activates CarPlay when SpringBoard launches (only for debugging purposes atm).
+- (void)applicationDidFinishLaunching:(UIApplication *)application
+{
+    %orig;
+    [[%c(SBStarkScreenManager) sharedInstance] screenManager:[%c(SBStarkScreenManager) sharedInstance] didTriggerConnectionHandlerEvent: nil forScreen: [UIScreen mainScreen]];
+
+    // Creates a proper frame to display any carplay UI, because when projected onto an external screen the UI is forced into portrait. :/
+    if (CGRectIsEmpty(carplay_frame)) {
+        CGRect screenFrame = [[UIScreen mainScreen] bounds];
+        BOOL shouldFlipHeight = screenFrame.size.width > screenFrame.size.height;
+        if (shouldFlipHeight) {
+            screenFrame = CGRectMake(screenFrame.origin.x, screenFrame.origin.y, screenFrame.size.height, screenFrame.size.width);
+        }
+
+        carplay_frame = screenFrame;
+        carplay_frame.size.height -= [%c(SBCarWindowLayoutStrategy) edgeInsetsForStatusBar].top;
+    }
+
+    // Also hide "SpringBoard's" icon grid, so it doesn't conflict with the Stark one.
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if ([window isKindOfClass:%c(SBAppWindow)]) {
+            window.hidden = YES;
+        }
+    }
+}
+
+%end
+
+%hook SBCarWindowLayoutStrategy
+
+// Flip CarPlay statusbar frame inset such that it's on the left and not the top (since when projected onto an external screen everything is portrait).
++ (UIEdgeInsets)edgeInsetsForStatusBar
+{
+    UIEdgeInsets insets = %orig;
+    insets.top = insets.left;
+    insets.left = 0.0;
+    return insets;
+}
+
+%end
+
+// Je ne care pas.
+%hook NSAssertionHandler
+
+- (void)handleFailureInMethod:(id)m object:(id)o file:(id)f lineNumber:(id)l description:(id)d
+{
+    return;
+}
+
+%end
+
+// Force libMobileGestalt to allow CarPlay capabilities.
+BOOL (*orig_MGGetBoolAnswer)(CFStringRef);
+BOOL fixed_MGGetBoolAnswer(CFStringRef string)
+{
+    if (CFEqual(string, CFSTR("StarkCapability") ) && CARPLAY_ACTIVE) {
+        return YES;
+    }
+
+    return orig_MGGetBoolAnswer(string);
+}
+
+%ctor {
+    MSHookFunction(((void *)MSFindSymbol(NULL, "_MGGetBoolAnswer")), (void *)fixed_MGGetBoolAnswer, (void **)&orig_MGGetBoolAnswer);
+
+    // Need to load up the Siri UI first to apply fixes.
+    dlopen("/System/Library/SpringBoardPlugins/Assistant.uibundle/Assistant", 2);
+}
