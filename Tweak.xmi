@@ -1,3 +1,11 @@
+//
+//  Tweak.xmi
+//  CarPlay Activator
+//
+//  Created by Adam Bell on 2014-11-28.
+//  Copyright (c) 2014 Adam Bell. All rights reserved.
+//
+
 %config(generator=MobileSubstrate);
 
 #import <UIKit/UIKit.h>

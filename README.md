@@ -23,6 +23,21 @@ Also also CarPlay Activator is an extremely lame codename, so that'll be changin
 ![Screenshot3](https://github.com/b3ll/CarPlayActivator/raw/master/Screenshots/Screenshot3@2x.png "CarPlay Activator Screenshot 3")  
 ![Screenshot4](https://github.com/b3ll/CarPlayActivator/raw/master/Screenshots/Screenshot4@2x.png "CarPlay Activator Screenshot 4")  
 
+## Explanation
+To be honest a lot of this nonsense could be completely avoided if a secondary "fake" FBSDisplay could be created and then used. That way SBApplications could create / own proper carScenes and there'd be a lot less things that were broken...
+
+Most of the CarPlay checking logic involves checking for both multiple UIScreens, the UIScreen interfaceIdiom, and FBSDisplay -> FBScene lookups. However, creating a fake FBSDisplay requires creating a fake CADisplay which isn't a lot of fun :P
+
+Basically here's how it works (I think... some parts are probably wrong or off):
+
+FrontBoard associates one FBSDisplay as the main display and has a bunch of FBScenes which are each SBApplication's mainScene. Once there's a second FBSDisplay available it can then generate a carScene for each SBApplication who's deemed capable. These carScenes would then be presented onto any externally connected screens (secondary FBSDisplay). 
+
+Originally, I had tried high-jacking a FBSDisplay whenever it was created and just duplicating that screen into a secondary FBSDisplay object with the same CADisplay object... and then shoving that FBSDisplay object into it's own lookup table to make it *appear* as if multiple screens were available. However. this causes UIScreen to freak out as it deems both those screens as the same. Also loads of the OS did *not* like this :P
+
+What I'm doing is just making all UIScreens appear as CarPlay screens as well as forcing all applications to render in landscape (as CarPlay on external screens is forced to portrait). In addition this means that each SBApplication's carScene is the mainScene, which doesn't guarantee success.
+
+Creating a local AirPlay server and then hacking touches to work on a view (who's contents are a secondary screen projected locally, using the device to AirPlay + mirroring) could be a neat solution to this, but I haven't tried it yet. That would grant us a legitimate second FBSDisplay to play with.
+
 ## How do I compile?
 I used Theos for this. You'll need to install them and setup the appropriate environment variables etc as well as configuring. Info on that [here](http://iphonedevwiki.net/index.php/Theos/Getting_Started).
 

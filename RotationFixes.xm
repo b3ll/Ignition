@@ -1,5 +1,14 @@
+//
+//  RotationFixes.xm
+//  CarPlay Activator
+//
+//  Created by Adam Bell on 2014-11-28.
+//  Copyright (c) 2014 Adam Bell. All rights reserved.
+//
 
-// Far too many rotation inhibitors, need to figure out a nicer solution...
+/*
+    Far too many rotation inhibitors, need to figure out a nicer solution...
+*/
 
 %hook SBStarkIconContentView
 
