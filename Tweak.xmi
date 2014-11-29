@@ -20,6 +20,7 @@ static CGRect carplay_frame = CGRectZero;
 
 // Temporary for now, flipswitch or preferences bundle toggle would make sense in the future.
 #define CARPLAY_ACTIVE YES
+#define UIInterfaceIdiomCarPlay 0x3
 
 %hook UIScreen
 
@@ -42,7 +43,40 @@ static CGRect carplay_frame = CGRectZero;
 // Loads of places check for this to be 0x3 (which I'm assuming is an external display or carplay).
 - (NSUInteger)_userInterfaceIdiom
 {
-    return (CARPLAY_ACTIVE ? 0x3 : %orig);
+    return (CARPLAY_ACTIVE ? UIInterfaceIdiomCarPlay : %orig);
+}
+
+- (void)_setUserInterfaceIdiom:(NSUInteger)idiom
+{
+    %orig(CARPLAY_ACTIVE ? UIInterfaceIdiomCarPlay : idiom);
+}
+
+%end
+
+%hook UIDevice
+
+- (void)_setUserInterfaceIdiom:(NSUInteger)idiom
+{
+    %orig(CARPLAY_ACTIVE ? UIInterfaceIdiomCarPlay : idiom);
+}
+
+- (void)_setActiveUserInterfaceIdiom:(NSUInteger)idiom
+{
+    %orig(CARPLAY_ACTIVE ? UIInterfaceIdiomCarPlay : idiom);
+}
+
+- (NSUInteger)_userInterfaceIdiom
+{
+    return (CARPLAY_ACTIVE ? UIInterfaceIdiomCarPlay : %orig);
+}
+
+%end
+
+%hook MAAppDelegate
+
+- (void)_attachToStarkScreen:(UIScreen *)screen
+{
+    %orig([UIScreen mainScreen]);
 }
 
 %end
