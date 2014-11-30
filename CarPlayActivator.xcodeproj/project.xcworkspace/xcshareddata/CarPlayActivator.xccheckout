@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>B0D3A193-BC8E-4057-8E7B-FFBEB6402C7A</string>
+	<key>IDESourceControlProjectName</key>
+	<string>CarPlayActivator</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>A83CF09BF7A679B9F40FC985E4462900F3A3F0C8</key>
+		<string>github.com:b3ll/CarPlayActivator.git</string>
+		<key>C65D2CD183E62A8E629CBCDB0FC34C7B821A5B9B</key>
+		<string>git://github.com/rpetrich/iphoneheaders.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>CarPlayActivator.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>A83CF09BF7A679B9F40FC985E4462900F3A3F0C8</key>
+		<string>../..</string>
+		<key>C65D2CD183E62A8E629CBCDB0FC34C7B821A5B9B</key>
+		<string>../../../../../../opt/theos/include</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:b3ll/CarPlayActivator.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>A83CF09BF7A679B9F40FC985E4462900F3A3F0C8</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>A83CF09BF7A679B9F40FC985E4462900F3A3F0C8</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CarPlayActivator</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C65D2CD183E62A8E629CBCDB0FC34C7B821A5B9B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>include</string>
+		</dict>
+	</array>
+</dict>
+</plist>

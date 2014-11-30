@@ -7,177 +7,185 @@
 //
 
 /*
-    Far too many rotation inhibitors, need to figure out a nicer solution...
-*/
+ Far too many rotation inhibitors, need to figure out a nicer solution...
+ */
 
-%hook SBStarkIconContentView
+#include <xctheos.h>
+
+#include "PrivateHeaders.h"
+
+GROUP(ORIENTATION_HACKS)
+
+HOOK(SBStarkIconContentView)
 
 - (void)setFrame:(CGRect)frame
 {
-    frame = carplay_frame;
-    %orig(frame);
+  frame = carplay_frame;
+  ORIG(frame);
 }
 
-%end
+END()
 
-%hook SBStarkNowPlayingWindow
+HOOK(SBStarkNowPlayingWindow)
 
 - (void)addSubview:(UIView *)subview
 {
-    subview.frame = carplay_frame;
-    %orig(subview);
+  subview.frame = carplay_frame;
+  ORIG(subview);
 }
 
-%end
+END()
 
-%hook AFUISiriView
+HOOK(AFUISiriView)
 
 - (void)setFrame:(CGRect)frame
 {
-    frame = CGRectMake(0, 0, carplay_frame.size.height, carplay_frame.size.width);
-    %orig(frame);
+  frame = CGRectMake(0, 0, carplay_frame.size.height, carplay_frame.size.width);
+  ORIG(frame);
 }
 
 - (CGRect)frame
 {
-    return CGRectMake(0, 0, carplay_frame.size.height, carplay_frame.size.width);
+  return CGRectMake(0, 0, carplay_frame.size.height, carplay_frame.size.width);
 }
 
-%end
+END()
 
-%hook SBStarkIconController
+HOOK(SBStarkIconController)
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    return UIInterfaceOrientationMaskLandscape;
+  return UIInterfaceOrientationMaskLandscape;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
-    return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
+  return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
 }
 
-%end
+END()
 
-%hook SBStarkStatusBarViewController
+HOOK(SBStarkStatusBarViewController)
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    return UIInterfaceOrientationMaskLandscape;
+  return UIInterfaceOrientationMaskLandscape;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
-    return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
+  return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
 }
 
-%end
+END()
 
-%hook SBStarkNowPlayingController
+HOOK(SBStarkNowPlayingController)
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    return UIInterfaceOrientationMaskLandscape;
+  return UIInterfaceOrientationMaskLandscape;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
-    return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
+  return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
 }
 
-%end
+END()
 
-%hook SBStarkLockOutViewController
+HOOK(SBStarkLockOutViewController)
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    return UIInterfaceOrientationMaskLandscape;
+  return UIInterfaceOrientationMaskLandscape;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
-    return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
+  return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
 }
 
-%end
+END()
 
-%hook SBStarkRelockUIViewController
+HOOK(SBStarkRelockUIViewController)
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    return UIInterfaceOrientationMaskLandscape;
+  return UIInterfaceOrientationMaskLandscape;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
-    return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
+  return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
 }
 
-%end
+END()
 
-%hook SBStarkNotificationViewController
+HOOK(SBStarkNotificationViewController)
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    return UIInterfaceOrientationMaskLandscape;
+  return UIInterfaceOrientationMaskLandscape;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
-    return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
+  return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
 }
 
-%end
+END()
 
-%hook ABStarkContactViewController
+HOOK(ABStarkContactViewController)
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    return UIInterfaceOrientationMaskLandscape;
+  return UIInterfaceOrientationMaskLandscape;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
-    return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
+  return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
 }
 
-%end
+END()
 
-%hook ABStarkContactsListViewController
+HOOK(ABStarkContactsListViewController)
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    return UIInterfaceOrientationMaskLandscape;
+  return UIInterfaceOrientationMaskLandscape;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
-    return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
+  return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
 }
 
-%end
+END()
+
+END_GROUP()
 
 /*
-%hook FBWindowContextHostWrapperView
+ %hook FBWindowContextHostWrapperView
 
-- (id)initWithHostManager:(id)arg1
-{
-    id original = %orig;
+ - (id)initWithHostManager:(id)arg1
+ {
+ id original = ORIG();
 
-    if (CARPLAY_ACTIVE) {
-        if ([[arg1 identifier] rangeOfString:@"spotify"].location != NSNotFound && carplay_active) {
-            [original setAlpha:0.0];
-        }
-    }
+ if (CARPLAY_ACTIVE) {
+ if ([[arg1 identifier] rangeOfString:@"spotify"].location != NSNotFound && carplay_active) {
+ [original setAlpha:0.0];
+ }
+ }
 
-    return original;
-}
+ return original;
+ }
 
-- (void)setAlpha:(CGFloat)alpha
-{
-    if (CARPLAY_ACTIVE) {
-        id manager = [self manager];
-        NSString *identifier = [manager identifier];
+ - (void)setAlpha:(CGFloat)alpha
+ {
+ if (CARPLAY_ACTIVE) {
+ id manager = [self manager];
+ NSString *identifier = [manager identifier];
 
-        if ([identifier rangeOfString:@"spotify"].location != NSNotFound && carplay_active) {
-            alpha = 0.0;
-        }
-    }
+ if ([identifier rangeOfString:@"spotify"].location != NSNotFound && carplay_active) {
+ alpha = 0.0;
+ }
+ }
 
-    %orig(alpha);
-}
+ ORIG(alpha);
+ }
 
-%end
-*/
+ %end
+ */

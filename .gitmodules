@@ -1,0 +1,3 @@
+[submodule "Xcode-Theos"]
+	path = Xcode-Theos
+	url = git@github.com:b3ll/Xcode-Theos.git
