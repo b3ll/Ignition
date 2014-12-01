@@ -15,7 +15,7 @@ CONFIG(generator=MobileSubstrate);
 
 #import "PrivateHeaders.h"
 
-#include "RotationFixes.xm"
+#include "ViewControllerFixes.xm"
 
 // Temporary for now, flipswitch or preferences bundle toggle would make sense in the future.
 #define CARPLAY_ACTIVE YES
@@ -48,10 +48,24 @@ HOOK(UIScreen)
 
 - (CGRect)bounds
 {
-  if ([[UIApplication sharedApplication].delegate isKindOfClass:GET_CLASS(MAAppDelegate)]) {
+  if ([[UIApplication sharedApplication].delegate isKindOfClass:GET_CLASS(MAAppDelegate)] ||
+      [[UIApplication sharedApplication].delegate isKindOfClass:GET_CLASS(SMSApplication)]) {
     return CGRectMake(88.0, 0.0, 936.0, 768.0);
   }
 
+#ifdef __LOGOS_H
+  return ORIG_T();
+#else
+  return CGRectZero;
+#endif
+}
+
+- (CGRect)applicationFrame
+{
+  if ([[UIApplication sharedApplication].delegate isKindOfClass:GET_CLASS(SMSApplication)]) {
+    return CGRectMake(88.0, 0.0, 936.0, 768.0);
+  }
+  
 #ifdef __LOGOS_H
   return ORIG_T();
 #else
@@ -94,6 +108,23 @@ HOOK(MAAppDelegate)
   // Remove native App window, since CarPlay one renders underneath it.
   self.window.hidden = YES;
   self.window = nil;
+}
+
+END()
+
+HOOK(SMSApplication)
+
+- (void)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+  ORIG();
+  
+  [[GET_CLASS(CKStarkManager) sharedInstance] attachStarkToScreen:[UIScreen mainScreen]];
+  
+  // Remove native App window, since CarPlay one renders underneath it.
+  // -window exists in the header, but not actually when the app is running... wtf?
+  UIWindow *window = [self valueForKey:@"_window"];
+  window.hidden = YES;
+  [self setValue:nil forKey:@"_window"];
 }
 
 END()
@@ -159,16 +190,6 @@ HOOK(SBCarWindowLayoutStrategy)
 
 END()
 
-// Je ne care pas.
-HOOK(NSAssertionHandler)
-
-- (void)handleFailureInMethod:(id)m object:(id)o file:(id)f lineNumber:(id)l description:(id)d
-{
-  return;
-}
-
-END()
-
 END_GROUP()
 
 // Force libMobileGestalt to allow CarPlay capabilities.
@@ -185,11 +206,11 @@ CFBooleanRef fixed_MGGetBoolAnswer(CFStringRef string)
 CTOR() {
   MSHookFunction(((void *)MSFindSymbol(NULL, "_MGGetBoolAnswer")), (void *)fixed_MGGetBoolAnswer, (void **)&orig_MGGetBoolAnswer);
 
-  if ([[UIApplication sharedApplication] isKindOfClass:GET_CLASS(SpringBoard)]) {
+  if ([[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.apple.springboard"]) {
     // Need to load up the Siri UI first to apply fixes.
-    dlopen("/System/Library/SpringBoardPlugins/Assistant.uibundle/Assistant", 2);
+    dlopen("/System/Library/SpringBoardPlugins/Assistant.uibundle/Assistant", RTLD_NOW);
   }
   
   INIT(CARPLAY_HAX);
-  INIT(LAYOUT_HAX);
+  INIT(VIEWCONTROLLER_FIXES);
 }

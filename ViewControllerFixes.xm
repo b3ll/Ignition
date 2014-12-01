@@ -1,5 +1,5 @@
 //
-//  RotationFixes.xm
+//  ViewControllerFixes.xm
 //  CarPlay Activator
 //
 //  Created by Adam Bell on 2014-11-28.
@@ -14,7 +14,7 @@
 
 #include "PrivateHeaders.h"
 
-GROUP(LAYOUT_HAX);
+GROUP(VIEWCONTROLLER_FIXES);
 
 HOOK(SBStarkIconContentView)
 
@@ -51,7 +51,7 @@ HOOK(AFUISiriView)
 
 END()
 
-HOOK(SBStarkIconController)
+HOOK(AFUISiriViewController)
 
 - (NSUInteger)supportedInterfaceOrientations
 {
@@ -59,6 +59,34 @@ HOOK(SBStarkIconController)
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
+  return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
+}
+
+END()
+
+HOOK(AFUISiriRemoteViewController)
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+  return UIInterfaceOrientationMaskLandscape;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation
+{
+  return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
+}
+
+END()
+
+HOOK(SBStarkIconController)
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+  return UIInterfaceOrientationMaskLandscape;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation
+{
   return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
 }
 
@@ -71,7 +99,8 @@ HOOK(SBStarkStatusBarViewController)
   return UIInterfaceOrientationMaskLandscape;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation
+{
   return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
 }
 
@@ -84,7 +113,8 @@ HOOK(SBStarkNowPlayingController)
   return UIInterfaceOrientationMaskLandscape;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation
+{
   return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
 }
 
@@ -97,7 +127,8 @@ HOOK(SBStarkLockOutViewController)
   return UIInterfaceOrientationMaskLandscape;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation
+{
   return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
 }
 
@@ -110,7 +141,8 @@ HOOK(SBStarkRelockUIViewController)
   return UIInterfaceOrientationMaskLandscape;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation
+{
   return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
 }
 
@@ -123,7 +155,8 @@ HOOK(SBStarkNotificationViewController)
   return UIInterfaceOrientationMaskLandscape;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation
+{
   return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
 }
 
@@ -136,7 +169,8 @@ HOOK(ABStarkContactViewController)
   return UIInterfaceOrientationMaskLandscape;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation
+{
   return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
 }
 
@@ -149,7 +183,8 @@ HOOK(ABStarkContactsListViewController)
   return UIInterfaceOrientationMaskLandscape;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation
+{
   return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
 }
 

@@ -25,7 +25,7 @@
 /* Begin PBXFileReference section */
 		0B0181B41A2BA24700048116 /* Tweak.xmi */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = Tweak.xmi; sourceTree = SOURCE_ROOT; };
 		0B0181B51A2BA25400048116 /* PrivateHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateHeaders.h; sourceTree = SOURCE_ROOT; };
-		0B0181B61A2BA25400048116 /* RotationFixes.xm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = RotationFixes.xm; sourceTree = SOURCE_ROOT; };
+		0B0181B61A2BA25400048116 /* ViewControllerFixes.xm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = ViewControllerFixes.xm; sourceTree = SOURCE_ROOT; };
 		0B6E4DDE1A2BA12000C51CC9 /* libCarPlayActivator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCarPlayActivator.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		66FA8ED91A2C02DA0053DC13 /* substrate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = substrate.h; path = ../../../../../../../../opt/theos/include/substrate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,7 +63,7 @@
 				66FA8ED91A2C02DA0053DC13 /* substrate.h */,
 				0B0181B51A2BA25400048116 /* PrivateHeaders.h */,
 				0B0181B41A2BA24700048116 /* Tweak.xmi */,
-				0B0181B61A2BA25400048116 /* RotationFixes.xm */,
+				0B0181B61A2BA25400048116 /* ViewControllerFixes.xm */,
 			);
 			path = CarPlayActivator;
 			sourceTree = "<group>";
@@ -132,7 +132,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=$PATH:/usr/local/bin\nmake package install";
+			shellScript = "export PATH=$PATH:/usr/local/bin\nmake clean\nmake package install";
 		};
 /* End PBXShellScriptBuildPhase section */
 

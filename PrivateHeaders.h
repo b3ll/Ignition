@@ -42,7 +42,15 @@ static inline BOOL carplay_active() { return [[NSFileManager defaultManager] fil
 
 @end
 
-@interface MAAppDelegate : NSObject <UIApplicationDelegate>
+@interface MAAppDelegate : NSObject<UIApplicationDelegate>
+@end
+
+@interface SMSApplication : UIApplication<UIApplicationDelegate>
+@end
+
+@interface CKStarkManager : NSObject
++ (instancetype)sharedInstance;
+- (void)attachStarkToScreen:(UIScreen *)screen;
 @end
 
 @interface SpringBoard : UIApplication
@@ -55,6 +63,12 @@ static inline BOOL carplay_active() { return [[NSFileManager defaultManager] fil
 @end
 
 @interface AFUISiriView : UIView
+@end
+
+@interface AFUISiriViewController : UIViewController
+@end
+
+@interface AFUISiriRemoteViewController : UIViewController
 @end
 
 @interface SBStarkIconController : UIViewController
