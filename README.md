@@ -43,6 +43,8 @@ I used Theos for this. You'll need to install them and setup the appropriate env
 
 ARM64 support is enabled by default and if you need help setting that up check [here](http://iphonedevwiki.net/index.php/Updating_extensions_for_iOS_7).
 
+I'm using [my own fork of theos](https://github.com/b3ll/theos), which is in-turn forked from @rpetrich's fork.
+
 If you edit the Makefile you can specify your iOS device's ip and such to build and run using `make package install`. Otherwise you can simply `make package` to generate a .deb file and install that by any means.
 
 ## Price?
