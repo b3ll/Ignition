@@ -21,7 +21,7 @@ CONFIG(generator=MobileSubstrate);
 #define CARPLAY_ACTIVE YES
 #define UIInterfaceIdiomCarPlay 0x3
 
-GROUP(CARPLAY_HACKS)
+GROUP(CARPLAY_HAX);
 
 HOOK(UIScreen)
 
@@ -44,6 +44,19 @@ HOOK(UIScreen)
 - (void)_setUserInterfaceIdiom:(NSUInteger)idiom
 {
   ORIG(CARPLAY_ACTIVE ? UIInterfaceIdiomCarPlay : idiom);
+}
+
+- (CGRect)bounds
+{
+  if ([[UIApplication sharedApplication].delegate isKindOfClass:GET_CLASS(MAAppDelegate)]) {
+    return CGRectMake(88.0, 0.0, 936.0, 768.0);
+  }
+
+#ifdef __LOGOS_H
+  return ORIG_T();
+#else
+  return CGRectZero;
+#endif
 }
 
 END()
@@ -72,6 +85,15 @@ HOOK(MAAppDelegate)
 - (void)_attachToStarkScreen:(UIScreen *)screen
 {
   ORIG([UIScreen mainScreen]);
+}
+
+- (void)applicationDidFinishLaunching:(UIApplication *)application
+{
+  ORIG();
+
+  // Remove native App window, since CarPlay one renders underneath it.
+  self.window.hidden = YES;
+  self.window = nil;
 }
 
 END()
@@ -147,25 +169,27 @@ HOOK(NSAssertionHandler)
 
 END()
 
-END_GROUP();
+END_GROUP()
 
 // Force libMobileGestalt to allow CarPlay capabilities.
-BOOL (*orig_MGGetBoolAnswer)(CFStringRef);
-BOOL fixed_MGGetBoolAnswer(CFStringRef string)
+CFBooleanRef (*orig_MGGetBoolAnswer)(CFStringRef);
+CFBooleanRef fixed_MGGetBoolAnswer(CFStringRef string)
 {
   if (CFEqual(string, CFSTR("StarkCapability")) && CARPLAY_ACTIVE) {
-    return YES;
+    return kCFBooleanTrue;
   }
 
   return orig_MGGetBoolAnswer(string);
 }
 
 CTOR() {
-  MSHookFunction(((void *)dlsym(NULL, "_MGGetBoolAnswer")), (void *)fixed_MGGetBoolAnswer, (void **)&orig_MGGetBoolAnswer);
+  MSHookFunction(((void *)MSFindSymbol(NULL, "_MGGetBoolAnswer")), (void *)fixed_MGGetBoolAnswer, (void **)&orig_MGGetBoolAnswer);
 
-  // Need to load up the Siri UI first to apply fixes.
-  dlopen("/System/Library/SpringBoardPlugins/Assistant.uibundle/Assistant", 2);
-
-  INIT(CARPLAY_HACKS);
-  INIT(ORIENTATION_HACKS);
+  if ([[UIApplication sharedApplication] isKindOfClass:GET_CLASS(SpringBoard)]) {
+    // Need to load up the Siri UI first to apply fixes.
+    dlopen("/System/Library/SpringBoardPlugins/Assistant.uibundle/Assistant", 2);
+  }
+  
+  INIT(CARPLAY_HAX);
+  INIT(LAYOUT_HAX);
 }

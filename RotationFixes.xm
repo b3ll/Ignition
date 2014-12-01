@@ -14,7 +14,7 @@
 
 #include "PrivateHeaders.h"
 
-GROUP(ORIENTATION_HACKS)
+GROUP(LAYOUT_HAX);
 
 HOOK(SBStarkIconContentView)
 
@@ -40,13 +40,13 @@ HOOK(AFUISiriView)
 
 - (void)setFrame:(CGRect)frame
 {
-  frame = CGRectMake(0, 0, carplay_frame.size.height, carplay_frame.size.width);
+  frame = CGRectMake(0.0, 0.0, carplay_frame.size.height, carplay_frame.size.width);
   ORIG(frame);
 }
 
 - (CGRect)frame
 {
-  return CGRectMake(0, 0, carplay_frame.size.height, carplay_frame.size.width);
+  return CGRectMake(0.0, 0.0, carplay_frame.size.height, carplay_frame.size.width);
 }
 
 END()
