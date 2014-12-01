@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0B0181B71A2BA26000048116 /* Tweak.xmi in Sources */ = {isa = PBXBuildFile; fileRef = 0B0181B41A2BA24700048116 /* Tweak.xmi */; };
+		0B97B2261A2CE5300027F7C5 /* CarPlayActivatorPreferences.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0B97B2251A2CE5300027F7C5 /* CarPlayActivatorPreferences.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,6 +28,10 @@
 		0B0181B51A2BA25400048116 /* PrivateHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrivateHeaders.h; path = CarPlayActivator/PrivateHeaders.h; sourceTree = SOURCE_ROOT; };
 		0B0181B61A2BA25400048116 /* ViewControllerFixes.xm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = ViewControllerFixes.xm; path = CarPlayActivator/ViewControllerFixes.xm; sourceTree = SOURCE_ROOT; };
 		0B6E4DDE1A2BA12000C51CC9 /* libCarPlayActivator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCarPlayActivator.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		0B97B2251A2CE5300027F7C5 /* CarPlayActivatorPreferences.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CarPlayActivatorPreferences.mm; path = CarPlayActivatorPreferences/CarPlayActivatorPreferences.mm; sourceTree = "<group>"; };
+		0B97B2271A2CE5390027F7C5 /* CarPlayActivatorPreferences.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = CarPlayActivatorPreferences.plist; path = CarPlayActivatorPreferences/Resources/CarPlayActivatorPreferences.plist; sourceTree = "<group>"; };
+		0B97B2281A2CE5560027F7C5 /* entry.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = entry.plist; path = CarPlayActivatorPreferences/entry.plist; sourceTree = "<group>"; };
+		0B97B2291A2CE55E0027F7C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = CarPlayActivatorPreferences/Resources/Info.plist; sourceTree = "<group>"; };
 		66FA8ED91A2C02DA0053DC13 /* substrate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = substrate.h; path = ../../../../../../../../opt/theos/include/substrate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -64,8 +69,28 @@
 				0B0181B51A2BA25400048116 /* PrivateHeaders.h */,
 				0B0181B41A2BA24700048116 /* Tweak.xmi */,
 				0B0181B61A2BA25400048116 /* ViewControllerFixes.xm */,
+				0B97B2241A2CE51C0027F7C5 /* Preferences Bundle */,
 			);
 			path = CarPlayActivator;
+			sourceTree = "<group>";
+		};
+		0B97B2241A2CE51C0027F7C5 /* Preferences Bundle */ = {
+			isa = PBXGroup;
+			children = (
+				0B97B2281A2CE5560027F7C5 /* entry.plist */,
+				0B97B2251A2CE5300027F7C5 /* CarPlayActivatorPreferences.mm */,
+				0B97B22A1A2CE5610027F7C5 /* Resources */,
+			);
+			name = "Preferences Bundle";
+			sourceTree = "<group>";
+		};
+		0B97B22A1A2CE5610027F7C5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0B97B2271A2CE5390027F7C5 /* CarPlayActivatorPreferences.plist */,
+				0B97B2291A2CE55E0027F7C5 /* Info.plist */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,6 +167,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B0181B71A2BA26000048116 /* Tweak.xmi in Sources */,
+				0B97B2261A2CE5300027F7C5 /* CarPlayActivatorPreferences.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,6 +255,8 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"\"${PROJECT_DIR}/CarPlayActivator/Xcode-Theos\"",
+					"\"/opt/theos/include\"",
+					"\"/usr/include\"\n\"/usr/include\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -243,6 +271,8 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"\"${PROJECT_DIR}/CarPlayActivator/Xcode-Theos\"",
+					"\"/opt/theos/include\"",
+					"\"/usr/include\"\n\"/usr/include\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";

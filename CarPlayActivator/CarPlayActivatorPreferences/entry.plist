@@ -1,0 +1,10 @@
+{
+    entry = {
+	bundle = CarPlayActivatorPreferences;
+	cell = PSLinkCell;
+	detail = CarPlayActivatorPreferencesListController;
+	icon = CarPlayActivatorPreferences.png;
+	isController = 1;
+	label = CarPlayActivatorPreferences;
+    };
+}
