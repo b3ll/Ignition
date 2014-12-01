@@ -203,7 +203,8 @@ CFBooleanRef fixed_MGGetBoolAnswer(CFStringRef string)
   return orig_MGGetBoolAnswer(string);
 }
 
-CTOR() {
+CTOR()
+{
   MSHookFunction(((void *)MSFindSymbol(NULL, "_MGGetBoolAnswer")), (void *)fixed_MGGetBoolAnswer, (void **)&orig_MGGetBoolAnswer);
 
   if ([[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.apple.springboard"]) {

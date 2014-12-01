@@ -51,144 +51,41 @@ HOOK(AFUISiriView)
 
 END()
 
-HOOK(AFUISiriViewController)
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-  return UIInterfaceOrientationMaskLandscape;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
-  return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
-}
-
+// Force ALL required view controllers to be landscape.
+#define FIX_VIEW_CONTROLLER(viewcontroller_class)\
+HOOK(viewcontroller_class) \
+\
+- (NSUInteger)supportedInterfaceOrientations\
+{\
+return UIInterfaceOrientationMaskLandscape;\
+}\
+\
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation\
+{\
+  return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);\
+}\
+\
 END()
 
-HOOK(AFUISiriRemoteViewController)
+FIX_VIEW_CONTROLLER(AFUISiriViewController)
 
-- (NSUInteger)supportedInterfaceOrientations
-{
-  return UIInterfaceOrientationMaskLandscape;
-}
+FIX_VIEW_CONTROLLER(AFUISiriRemoteViewController)
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation
-{
-  return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
-}
+FIX_VIEW_CONTROLLER(SBStarkIconController)
 
-END()
+FIX_VIEW_CONTROLLER(SBStarkStatusBarViewController)
 
-HOOK(SBStarkIconController)
+FIX_VIEW_CONTROLLER(SBStarkNowPlayingController)
 
-- (NSUInteger)supportedInterfaceOrientations
-{
-  return UIInterfaceOrientationMaskLandscape;
-}
+FIX_VIEW_CONTROLLER(SBStarkLockOutViewController)
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation
-{
-  return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
-}
+FIX_VIEW_CONTROLLER(SBStarkRelockUIViewController)
 
-END()
+FIX_VIEW_CONTROLLER(SBStarkNotificationViewController)
 
-HOOK(SBStarkStatusBarViewController)
+FIX_VIEW_CONTROLLER(ABStarkContactViewController)
 
-- (NSUInteger)supportedInterfaceOrientations
-{
-  return UIInterfaceOrientationMaskLandscape;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation
-{
-  return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
-}
-
-END()
-
-HOOK(SBStarkNowPlayingController)
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-  return UIInterfaceOrientationMaskLandscape;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation
-{
-  return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
-}
-
-END()
-
-HOOK(SBStarkLockOutViewController)
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-  return UIInterfaceOrientationMaskLandscape;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation
-{
-  return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
-}
-
-END()
-
-HOOK(SBStarkRelockUIViewController)
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-  return UIInterfaceOrientationMaskLandscape;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation
-{
-  return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
-}
-
-END()
-
-HOOK(SBStarkNotificationViewController)
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-  return UIInterfaceOrientationMaskLandscape;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation
-{
-  return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
-}
-
-END()
-
-HOOK(ABStarkContactViewController)
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-  return UIInterfaceOrientationMaskLandscape;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation
-{
-  return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
-}
-
-END()
-
-HOOK(ABStarkContactsListViewController)
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-  return UIInterfaceOrientationMaskLandscape;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation
-{
-  return (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
-}
-
-END()
+FIX_VIEW_CONTROLLER(ABStarkContactsListViewController)
 
 END_GROUP()
 
