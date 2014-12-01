@@ -1,3 +1,3 @@
-[submodule "Xcode-Theos"]
-	path = Xcode-Theos
+[submodule "CarPlayActivator/Xcode-Theos"]
+	path = CarPlayActivator/Xcode-Theos
 	url = git@github.com:b3ll/Xcode-Theos.git
