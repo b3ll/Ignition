@@ -22,7 +22,7 @@
 		<key>A83CF09BF7A679B9F40FC985E4462900F3A3F0C8</key>
 		<string>../..</string>
 		<key>C65D2CD183E62A8E629CBCDB0FC34C7B821A5B9B</key>
-		<string>../../../../../../opt/theos/include</string>
+		<string>../../../opt/theos/include</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>github.com:b3ll/CarPlayActivator.git</string>

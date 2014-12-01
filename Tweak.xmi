@@ -35,12 +35,6 @@ HOOK(UIScreen)
   return (CARPLAY_ACTIVE ? [UIScreen mainScreen] : ORIG());
 }
 
-// I *think* this is for table view cells and buttons and such that should be larger for in the car?
-- (BOOL)_isUIElementLimited:(id)object
-{
-  return (CARPLAY_ACTIVE ? YES : ORIG_T());
-}
-
 // Loads of places check for this to be 0x3 (which I'm assuming is an external display or carplay).
 - (NSUInteger)_userInterfaceIdiom
 {
