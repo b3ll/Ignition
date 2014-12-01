@@ -88,36 +88,3 @@ FIX_VIEW_CONTROLLER(ABStarkContactViewController)
 FIX_VIEW_CONTROLLER(ABStarkContactsListViewController)
 
 END_GROUP()
-
-/*
- %hook FBWindowContextHostWrapperView
-
- - (id)initWithHostManager:(id)arg1
- {
- id original = ORIG();
-
- if (CARPLAY_ACTIVE) {
- if ([[arg1 identifier] rangeOfString:@"spotify"].location != NSNotFound && carplay_active) {
- [original setAlpha:0.0];
- }
- }
-
- return original;
- }
-
- - (void)setAlpha:(CGFloat)alpha
- {
- if (CARPLAY_ACTIVE) {
- id manager = [self manager];
- NSString *identifier = [manager identifier];
-
- if ([identifier rangeOfString:@"spotify"].location != NSNotFound && carplay_active) {
- alpha = 0.0;
- }
- }
-
- ORIG(alpha);
- }
-
- %end
- */

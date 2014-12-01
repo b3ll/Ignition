@@ -42,6 +42,12 @@ static inline BOOL carplay_active() { return [[NSFileManager defaultManager] fil
 
 @end
 
+@interface FBWindowContextHostWrapperView : UIView
+
+- (id)manager;
+
+@end
+
 @interface MAAppDelegate : NSObject<UIApplicationDelegate>
 @end
 
