@@ -101,5 +101,10 @@ static inline BOOL carplay_active() { return [[NSFileManager defaultManager] fil
 @interface ABStarkContactsListViewController : UIViewController
 @end
 
+@interface LSApplicationProxy : NSObject
+-(NSDictionary *)entitlements;
++(id)applicationProxyForIdentifier:(id)arg1;
+@end
+
 #endif
 

@@ -198,9 +198,10 @@ HOOK(FBWindowContextHostWrapperView)
   
   if (CARPLAY_ACTIVE) {
     NSString *identifier = [manager identifier];
+      LSApplicationProxy *proxy = [GET_CLASS(LSApplicationProxy) applicationProxyForIdentifier:identifier];
+      NSDictionary *entitlements = [proxy entitlements];
     
-    if ([identifier rangeOfString:@"spotify"].location != NSNotFound ||
-        [identifier rangeOfString:@"overcast"].location != NSNotFound) {
+    if (entitlements[@"com.apple.developer.playable-content"]) {
       [original setAlpha:0.0];
     }
   }
@@ -213,9 +214,10 @@ HOOK(FBWindowContextHostWrapperView)
   if (CARPLAY_ACTIVE) {
     id manager = [self manager];
     NSString *identifier = [manager identifier];
+      LSApplicationProxy *proxy = [GET_CLASS(LSApplicationProxy) applicationProxyForIdentifier:identifier];
+      NSDictionary *entitlements = [proxy entitlements];
     
-    if ([identifier rangeOfString:@"spotify"].location != NSNotFound ||
-        [identifier rangeOfString:@"overcast"].location != NSNotFound) {
+    if (entitlements[@"com.apple.developer.playable-content"]) {
       alpha = 0.0;
     }
   }
