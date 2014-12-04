@@ -60,8 +60,7 @@ NEW()
   }
   
   // Adjust insets for CarPlay statusbar.
-  carBounds.origin.x += STATUSBAR_WIDTH;
-  carBounds.size.width -= STATUSBAR_WIDTH;
+  carBounds.size.height -= STATUSBAR_WIDTH;
   
   return carBounds;
 }
@@ -173,11 +172,7 @@ HOOK(SpringBoard)
   
   // Creates a proper frame to display any carplay UI, because when projected onto an external screen the UI is forced into portrait. :/
   if (CGRectIsEmpty(carplay_frame)) {
-    CGRect screenFrame = [[UIScreen mainScreen] bounds];
-
-    
-    carplay_frame = screenFrame;
-    carplay_frame.size.height -= [GET_CLASS(SBCarWindowLayoutStrategy) edgeInsetsForStatusBar].top;
+    carplay_frame = [[UIScreen mainScreen] __carBounds];
   }
   
   // Also hide "SpringBoard's" icon grid, so it doesn't conflict with the Stark one.
