@@ -40,13 +40,44 @@ HOOK(AFUISiriView)
 
 - (void)setFrame:(CGRect)frame
 {
-  frame = CGRectMake(0.0, 0.0, carplay_frame.size.height, carplay_frame.size.width);
-  ORIG(frame);
+  ORIG(carplay_frame);
 }
 
 - (CGRect)frame
 {
-  return CGRectMake(0.0, 0.0, carplay_frame.size.height, carplay_frame.size.width);
+  return carplay_frame;
+}
+
+END()
+
+// Since UIKit apps have a secondary window on an external screen when in CarPlay mode, we need to hide the context hosting view for the main app window (since the CarPlay one is displayed underneath).
+HOOK(FBWindowContextHostWrapperView)
+
+- (id)initWithHostManager:(id)manager
+{
+  id original = ORIG();
+  
+  if (CARPLAY_ACTIVE) {
+    [self setAlpha:1.0];
+  }
+  
+  return original;
+}
+
+- (void)setAlpha:(CGFloat)alpha
+{
+  if (CARPLAY_ACTIVE) {
+    id manager = [self manager];
+    NSString *identifier = [manager identifier];
+    LSApplicationProxy *proxy = [GET_CLASS(LSApplicationProxy) applicationProxyForIdentifier:identifier];
+    NSDictionary *entitlements = [proxy entitlements];
+    
+    if (entitlements[@"com.apple.developer.playable-content"]) {
+      alpha = 0.0;
+    }
+  }
+  
+  ORIG(alpha);
 }
 
 END()

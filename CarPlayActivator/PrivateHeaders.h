@@ -11,6 +11,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define CARPLAY_ACTIVE YES
+
 static CGRect carplay_frame = CGRectZero;
 
 static BOOL _carplay_active = NO;
@@ -19,6 +21,7 @@ static inline BOOL carplay_active() { return [[NSFileManager defaultManager] fil
 @interface UIScreen (carplay_hax)
 
 - (BOOL)_isMainScreen;
+- (CGRect)__carBounds;
 
 @end
 

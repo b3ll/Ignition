@@ -18,8 +18,9 @@ CONFIG(generator=MobileSubstrate);
 #include "ViewControllerFixes.xm"
 
 // Temporary for now, flipswitch or preferences bundle toggle would make sense in the future.
-#define CARPLAY_ACTIVE YES
-#define UIInterfaceIdiomCarPlay 0x3
+#define UIInterfaceIdiomCarPlay 0x3 // Or external display?
+
+#define STATUSBAR_WIDTH 88.0
 
 GROUP(CARPLAY_HAX);
 
@@ -46,11 +47,30 @@ HOOK(UIScreen)
   ORIG(CARPLAY_ACTIVE ? UIInterfaceIdiomCarPlay : idiom);
 }
 
+NEW()
+- (CGRect)__carBounds
+{
+  CGRect carBounds = [self bounds];
+  
+  BOOL shouldFlipHeight = carBounds.size.width > carBounds.size.height;
+  if (shouldFlipHeight) {
+    CGFloat newHeight = carBounds.size.width;
+    carBounds.size.width = carBounds.size.height;
+    carBounds.size.height = newHeight;
+  }
+  
+  // Adjust insets for CarPlay statusbar.
+  carBounds.origin.x += STATUSBAR_WIDTH;
+  carBounds.size.width -= STATUSBAR_WIDTH;
+  
+  return carBounds;
+}
+
 - (CGRect)bounds
 {
   if ([[UIApplication sharedApplication].delegate isKindOfClass:GET_CLASS(MAAppDelegate)] ||
       [[UIApplication sharedApplication].delegate isKindOfClass:GET_CLASS(SMSApplication)]) {
-    return CGRectMake(88.0, 0.0, 936.0, 768.0);
+    return [self __carBounds];
   }
   
 #ifdef __LOGOS_H
@@ -63,7 +83,7 @@ HOOK(UIScreen)
 - (CGRect)applicationFrame
 {
   if ([[UIApplication sharedApplication].delegate isKindOfClass:GET_CLASS(SMSApplication)]) {
-    return CGRectMake(88.0, 0.0, 936.0, 768.0);
+    return [self __carBounds];
   }
   
 #ifdef __LOGOS_H
@@ -154,10 +174,7 @@ HOOK(SpringBoard)
   // Creates a proper frame to display any carplay UI, because when projected onto an external screen the UI is forced into portrait. :/
   if (CGRectIsEmpty(carplay_frame)) {
     CGRect screenFrame = [[UIScreen mainScreen] bounds];
-    BOOL shouldFlipHeight = screenFrame.size.width > screenFrame.size.height;
-    if (shouldFlipHeight) {
-      screenFrame = CGRectMake(screenFrame.origin.x, screenFrame.origin.y, screenFrame.size.height, screenFrame.size.width);
-    }
+
     
     carplay_frame = screenFrame;
     carplay_frame.size.height -= [GET_CLASS(SBCarWindowLayoutStrategy) edgeInsetsForStatusBar].top;
@@ -186,43 +203,6 @@ HOOK(SBCarWindowLayoutStrategy)
   insets.top = insets.left;
   insets.left = 0.0;
   return insets;
-}
-
-END()
-
-HOOK(FBWindowContextHostWrapperView)
-
-- (id)initWithHostManager:(id)manager
-{
-  id original = ORIG();
-  
-  if (CARPLAY_ACTIVE) {
-    NSString *identifier = [manager identifier];
-      LSApplicationProxy *proxy = [GET_CLASS(LSApplicationProxy) applicationProxyForIdentifier:identifier];
-      NSDictionary *entitlements = [proxy entitlements];
-    
-    if (entitlements[@"com.apple.developer.playable-content"]) {
-      [original setAlpha:0.0];
-    }
-  }
-  
-  return original;
-}
-
-- (void)setAlpha:(CGFloat)alpha
-{
-  if (CARPLAY_ACTIVE) {
-    id manager = [self manager];
-    NSString *identifier = [manager identifier];
-      LSApplicationProxy *proxy = [GET_CLASS(LSApplicationProxy) applicationProxyForIdentifier:identifier];
-      NSDictionary *entitlements = [proxy entitlements];
-    
-    if (entitlements[@"com.apple.developer.playable-content"]) {
-      alpha = 0.0;
-    }
-  }
-  
-  ORIG(alpha);
 }
 
 END()
