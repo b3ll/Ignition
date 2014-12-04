@@ -21,7 +21,6 @@ static inline BOOL carplay_active() { return [[NSFileManager defaultManager] fil
 @interface UIScreen (carplay_hax)
 
 - (BOOL)_isMainScreen;
-- (CGRect)__carBounds;
 
 @end
 

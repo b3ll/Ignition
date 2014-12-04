@@ -40,12 +40,13 @@ HOOK(AFUISiriView)
 
 - (void)setFrame:(CGRect)frame
 {
-  ORIG(carplay_frame);
+  frame = CGRectMake(0.0, 0.0, carplay_frame.size.height, carplay_frame.size.width);
+  ORIG(frame);
 }
 
 - (CGRect)frame
 {
-  return carplay_frame;
+  return CGRectMake(0.0, 0.0, carplay_frame.size.height, carplay_frame.size.width);
 }
 
 END()
