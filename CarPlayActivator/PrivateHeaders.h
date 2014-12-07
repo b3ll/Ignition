@@ -11,12 +11,14 @@
 
 #import <UIKit/UIKit.h>
 
-#define CARPLAY_ACTIVE YES
+#define CARPLAY_ACTIVE carplay_active()
 
-static CGRect carplay_frame = CGRectZero;
+#define CARPLAY_ACTIVE_FILE_PATH @"/var/mobile/Library/Preferences/.carplayuienforced"
+
+static CGRect carplay_frame;
 
 static BOOL _carplay_active = NO;
-static inline BOOL carplay_active() { return [[NSFileManager defaultManager] fileExistsAtPath:@"/Library/Preferences/.carplayuienforced"]; };
+static inline BOOL carplay_active() { return [[NSFileManager defaultManager] fileExistsAtPath:CARPLAY_ACTIVE_FILE_PATH]; };
 
 @interface UIScreen (carplay_hax)
 
