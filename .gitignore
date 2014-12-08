@@ -2,6 +2,7 @@
 #
 .theos
 *.deb
+Packages/
 
 # Xcode
 #
