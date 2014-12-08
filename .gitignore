@@ -3,6 +3,7 @@
 .theos
 *.deb
 Packages/
+layout/
 
 # Xcode
 #
@@ -22,4 +23,3 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
-*.app
