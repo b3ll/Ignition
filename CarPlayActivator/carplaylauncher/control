@@ -1,0 +1,8 @@
+Package: com.pigigaldi.carplaylauncher
+Name: CarPlayLauncher
+Depends: mobilesubstrate, com.a3tweaks.flipswitch, firmware (>= 8.1)
+Version: 0.0.1
+Architecture: iphoneos-arm
+Description: (FlipSwitch) Enable/Disable CarPlay Activator (by Adam Bell).
+Author: Pigi Galdi
+Section: Addons (Flipswitch)
