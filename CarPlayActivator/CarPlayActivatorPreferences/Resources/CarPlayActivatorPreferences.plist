@@ -8,7 +8,7 @@
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>CarPlayActivatorPreferences First Page</string>
+			<string>CarPlay Activator</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -16,14 +16,14 @@
 			<key>default</key>
 			<true/>
 			<key>defaults</key>
-			<string>ca.adambell.carplayactivatorpreferences</string>
+			<string>ca.adambell.carplayactivator</string>
 			<key>key</key>
-			<string>AwesomeSwitch1</string>
+			<string>reverseOrientation</string>
 			<key>label</key>
-			<string>Awesome Switch 1</string>
+			<string>Reverse Orientation</string>
 		</dict>
 	</array>
 	<key>title</key>
-	<string>CarPlayActivatorPreferences</string>
+	<string>CarPlay Activator</string>
 </dict>
 </plist>

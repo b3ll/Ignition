@@ -58,24 +58,20 @@ HOOK(FBWindowContextHostWrapperView)
 {
   id original = ORIG();
   
-  if (CARPLAY_ACTIVE) {
-    [self setAlpha:1.0];
-  }
+  [self setAlpha:1.0];
   
   return original;
 }
 
 - (void)setAlpha:(CGFloat)alpha
 {
-  if (CARPLAY_ACTIVE) {
-    id manager = [self manager];
-    NSString *identifier = [manager identifier];
-    LSApplicationProxy *proxy = [GET_CLASS(LSApplicationProxy) applicationProxyForIdentifier:identifier];
-    NSDictionary *entitlements = [proxy entitlements];
-    
-    if (entitlements[@"com.apple.developer.playable-content"]) {
-      alpha = 0.0;
-    }
+  id manager = [self manager];
+  NSString *identifier = [manager identifier];
+  LSApplicationProxy *proxy = [GET_CLASS(LSApplicationProxy) applicationProxyForIdentifier:identifier];
+  NSDictionary *entitlements = [proxy entitlements];
+  
+  if (entitlements[@"com.apple.developer.playable-content"]) {
+    alpha = 0.0;
   }
   
   ORIG(alpha);

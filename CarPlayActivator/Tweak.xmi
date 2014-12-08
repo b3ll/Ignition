@@ -28,30 +28,41 @@ HOOK(UIScreen)
 
 - (BOOL)_isCarScreen
 {
-  return CARPLAY_ACTIVE;
+  return YES;
 }
 
 - (UIScreen *)_carScreen
 {
-  return (CARPLAY_ACTIVE ? [UIScreen mainScreen] : ORIG());
+  return [UIScreen mainScreen];
 }
 
 // Loads of places check for this to be 0x3 (which I'm assuming is an external display or carplay).
 - (NSUInteger)_userInterfaceIdiom
 {
-  return (CARPLAY_ACTIVE ? UIInterfaceIdiomCarPlay : ORIG_T());
+  return UIInterfaceIdiomCarPlay;
 }
 
 - (void)_setUserInterfaceIdiom:(NSUInteger)idiom
 {
-  ORIG(CARPLAY_ACTIVE ? UIInterfaceIdiomCarPlay : idiom);
+  ORIG(UIInterfaceIdiomCarPlay);
 }
 
 - (CGRect)bounds
 {
+#ifdef __LOGOS_H
+  CGRect screenBounds = ORIG();
+#else
+  CGRect screenBounds = CGRectZero;
+#endif
+  
+  BOOL shouldFlipWidth = screenBounds.size.height > screenBounds.size.width;
+  if (shouldFlipWidth) {
+    screenBounds = CGRectMake(screenBounds.origin.x, screenBounds.origin.y, screenBounds.size.height, screenBounds.size.width);
+  }
+  
   if ([[UIApplication sharedApplication].delegate isKindOfClass:GET_CLASS(MAAppDelegate)] ||
       [[UIApplication sharedApplication].delegate isKindOfClass:GET_CLASS(SMSApplication)]) {
-    return CGRectMake(STATUSBAR_WIDTH, 0.0, 936.0, 768.0);
+    return CGRectMake(STATUSBAR_WIDTH, 0.0, screenBounds.size.width - STATUSBAR_WIDTH, screenBounds.size.height);
   }
   
 #ifdef __LOGOS_H
@@ -64,7 +75,7 @@ HOOK(UIScreen)
 - (CGRect)applicationFrame
 {
   if ([[UIApplication sharedApplication].delegate isKindOfClass:GET_CLASS(SMSApplication)]) {
-    return CGRectMake(STATUSBAR_WIDTH, 0.0, 936.0, 768.0);
+    return [[UIScreen mainScreen] bounds];
   }
   
 #ifdef __LOGOS_H
@@ -80,17 +91,34 @@ HOOK(UIDevice)
 
 - (void)_setUserInterfaceIdiom:(NSUInteger)idiom
 {
-  ORIG(CARPLAY_ACTIVE ? UIInterfaceIdiomCarPlay : idiom);
+  ORIG(UIInterfaceIdiomCarPlay);
 }
 
 - (void)_setActiveUserInterfaceIdiom:(NSUInteger)idiom
 {
-  ORIG(CARPLAY_ACTIVE ? UIInterfaceIdiomCarPlay : idiom);
+  ORIG(UIInterfaceIdiomCarPlay);
 }
 
 - (NSUInteger)_userInterfaceIdiom
 {
-  return (CARPLAY_ACTIVE ? UIInterfaceIdiomCarPlay : ORIG_T());
+  return UIInterfaceIdiomCarPlay;
+}
+
+END()
+
+// Don't need this anymore!
+HOOK(UIStatusBarWindow)
+
+- (id)initWithFrame:(CGRect)frame
+{
+  id orig = ORIG();
+  [self setAlpha:0.0];
+  return orig;
+}
+
+- (void)setAlpha:(CGFloat)alpha
+{
+  ORIG(0.0);
 }
 
 END()
@@ -134,12 +162,13 @@ HOOK(FBSDisplay)
 
 - (BOOL)isCarDisplay
 {
-  return CARPLAY_ACTIVE;
+  return YES;
 }
 
+// lulz
 - (BOOL)isAirPlayDisplay
 {
-  return !CARPLAY_ACTIVE;
+  return NO;
 }
 
 END()
@@ -174,6 +203,22 @@ HOOK(SpringBoard)
 
 END()
 
+HOOK(LSApplicationProxy)
+
+- (NSDictionary *)entitlements
+{
+  if ([[self applicationIdentifier] isEqualToString:@"ca.adambell.CarPlayActivatorLauncher"]) {
+    return @{
+             @"SBStarkCapable" : @YES,
+             @"com.apple.developer.playable-content" : @YES
+             };
+  }
+  
+  return ORIG();
+}
+
+END()
+
 HOOK(SBCarWindowLayoutStrategy)
 
 // Flip CarPlay statusbar frame inset such that it's on the left and not the top (since when projected onto an external screen everything is portrait).
@@ -197,7 +242,7 @@ END_GROUP()
 CFBooleanRef (*orig_MGGetBoolAnswer)(CFStringRef);
 CFBooleanRef fixed_MGGetBoolAnswer(CFStringRef string)
 {
-  if (CFEqual(string, CFSTR("StarkCapability")) && CARPLAY_ACTIVE) {
+  if (CFEqual(string, CFSTR("StarkCapability"))) {
     return kCFBooleanTrue;
   }
   

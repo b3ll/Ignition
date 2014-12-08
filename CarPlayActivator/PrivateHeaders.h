@@ -26,6 +26,9 @@ static inline BOOL carplay_active() { return [[NSFileManager defaultManager] fil
 
 @end
 
+@interface UIStatusBarWindow : UIWindow
+@end
+
 @interface FBSDisplay : NSObject
 
 - (BOOL)isMainDisplay;
@@ -106,8 +109,10 @@ static inline BOOL carplay_active() { return [[NSFileManager defaultManager] fil
 @end
 
 @interface LSApplicationProxy : NSObject
--(NSDictionary *)entitlements;
-+(id)applicationProxyForIdentifier:(id)arg1;
++ (instancetype)applicationProxyForIdentifier:(id)arg1;
+
+- (NSDictionary *)entitlements;
+- (NSString *)applicationIdentifier;
 @end
 
 #endif

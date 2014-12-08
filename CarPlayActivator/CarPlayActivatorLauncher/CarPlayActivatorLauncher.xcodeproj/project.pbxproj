@@ -7,17 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B395CE41A33F00400D6D4D1 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0B395CE31A33F00400D6D4D1 /* Entitlements.plist */; };
 		0B9EC35E1A33EA8F00F15F0C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9EC35D1A33EA8F00F15F0C /* main.m */; };
 		0B9EC3691A33EA8F00F15F0C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B9EC3681A33EA8F00F15F0C /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0B395CE31A33F00400D6D4D1 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = SOURCE_ROOT; };
 		0B9EC3581A33EA8F00F15F0C /* CarPlayActivatorLauncher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarPlayActivatorLauncher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B9EC35C1A33EA8F00F15F0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B9EC35D1A33EA8F00F15F0C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0B9EC3681A33EA8F00F15F0C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		66616B3A1A351796007EB77B /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; name = Entitlements.plist; path = ../../../../../jailbreak_dev/carplayactivator/carplayactivator/CarPlayActivatorLauncher/Entitlements.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				0B9EC35C1A33EA8F00F15F0C /* Info.plist */,
-				0B395CE31A33F00400D6D4D1 /* Entitlements.plist */,
+				66616B3A1A351796007EB77B /* Entitlements.plist */,
 				0B9EC35D1A33EA8F00F15F0C /* main.m */,
 			);
 			name = "Supporting Files";
@@ -124,7 +123,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B395CE41A33F00400D6D4D1 /* Entitlements.plist in Resources */,
 				0B9EC3691A33EA8F00F15F0C /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,7 +141,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "pushd ${CONFIGURATION_BUILD_DIR}\n/opt/theos/bin/ldid -S${PROJECT_DIR}/Entitlements.plist CarPlayActivatorLauncher.app/CarPlayActivatorLauncher\ncp -rp CarPlayActivatorLauncher.app ${PROJECT_DIR}/../layout/Applications/\npopd";
+			shellScript = "pushd ${CONFIGURATION_BUILD_DIR}\ncodesign -s - --entitlements ${PROJECT_DIR}/Entitlements.plist -f CarPlayActivatorLauncher.app\ncp -rp CarPlayActivatorLauncher.app ${PROJECT_DIR}/../layout/Applications/\npopd";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -176,6 +174,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -218,6 +217,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
