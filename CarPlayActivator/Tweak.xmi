@@ -20,8 +20,6 @@ CONFIG(generator=MobileSubstrate);
 // Temporary for now, flipswitch or preferences bundle toggle would make sense in the future.
 #define UIInterfaceIdiomCarPlay 0x3 // Or external display?
 
-#define STATUSBAR_WIDTH 88.0
-
 GROUP(CARPLAY_HAX);
 
 HOOK(UIScreen)
@@ -59,9 +57,10 @@ HOOK(UIScreen)
   if (shouldFlipWidth) {
     screenBounds = CGRectMake(screenBounds.origin.x, screenBounds.origin.y, screenBounds.size.height, screenBounds.size.width);
   }
-  
+
   if ([[UIApplication sharedApplication].delegate isKindOfClass:GET_CLASS(MAAppDelegate)] ||
-      [[UIApplication sharedApplication].delegate isKindOfClass:GET_CLASS(SMSApplication)]) {
+      [[UIApplication sharedApplication].delegate isKindOfClass:GET_CLASS(SMSApplication)] ||
+      [[UIApplication sharedApplication].delegate isKindOfClass:GET_CLASS(MobilePhoneApplication)]) {
     return CGRectMake(STATUSBAR_WIDTH, 0.0, screenBounds.size.width - STATUSBAR_WIDTH, screenBounds.size.height);
   }
   
@@ -74,8 +73,10 @@ HOOK(UIScreen)
 
 - (CGRect)applicationFrame
 {
-  if ([[UIApplication sharedApplication].delegate isKindOfClass:GET_CLASS(SMSApplication)]) {
-    return [[UIScreen mainScreen] bounds];
+  if ([[UIApplication sharedApplication].delegate isKindOfClass:GET_CLASS(MAAppDelegate)] ||
+      [[UIApplication sharedApplication].delegate isKindOfClass:GET_CLASS(SMSApplication)] ||
+      [[UIApplication sharedApplication].delegate isKindOfClass:GET_CLASS(MobilePhoneApplication)]) {
+    return [UIScreen mainScreen].bounds;
   }
   
 #ifdef __LOGOS_H
@@ -87,7 +88,27 @@ HOOK(UIScreen)
 
 END()
 
+HOOK(UIWindow)
+
+- (void)setFrame:(CGRect)frame
+{
+  if ([[UIApplication sharedApplication].delegate isKindOfClass:GET_CLASS(MAAppDelegate)] ||
+      [[UIApplication sharedApplication].delegate isKindOfClass:GET_CLASS(SMSApplication)] ||
+      [[UIApplication sharedApplication].delegate isKindOfClass:GET_CLASS(MobilePhoneApplication)]) {
+    ORIG([UIScreen mainScreen].bounds);
+  } else {
+    ORIG();
+  }
+}
+
+END()
+
 HOOK(UIDevice)
+
+- (NSUInteger)orientation
+{
+  return UIDeviceOrientationLandscapeLeft;
+}
 
 - (void)_setUserInterfaceIdiom:(NSUInteger)idiom
 {
@@ -141,6 +162,28 @@ HOOK(MAAppDelegate)
 
 END()
 
+HOOK(MobilePhoneApplication)
+
+- (void)applicationDidFinishLaunching:(UIApplication *)application
+{
+  ORIG();
+
+  [[GET_CLASS(PHStarkManager) sharedStarkManager] attachStarkToScreen:[UIScreen mainScreen]];
+
+  // Remove native App window, since CarPlay one renders underneath it.
+  // -window exists in the header, but not actually when the app is running... wtf?
+  UIWindow *window = [self valueForKey:@"_window"];
+  window.hidden = YES;
+  [self setValue:nil forKey:@"_window"];
+}
+
+- (NSUInteger)supportedInterfaceOrientationsForWindow:(UIWindow *)window
+{
+  return UIInterfaceOrientationMaskLandscape;
+}
+
+END()
+
 HOOK(SMSApplication)
 
 - (void)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -186,7 +229,7 @@ HOOK(SpringBoard)
     CGRect screenFrame = [[UIScreen mainScreen] bounds];
     BOOL shouldFlipHeight = screenFrame.size.width > screenFrame.size.height;
     if (shouldFlipHeight) {
-      screenFrame = CGRectMake(screenFrame.origin.x, screenFrame.origin.y, screenFrame.size.height, screenFrame.size.width);
+      screenFrame = CGRectMake(STATUSBAR_WIDTH, screenFrame.origin.y, screenFrame.size.height, screenFrame.size.width);
     }
     
     carplay_frame = screenFrame;

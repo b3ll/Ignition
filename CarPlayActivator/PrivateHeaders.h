@@ -15,6 +15,8 @@
 
 #define CARPLAY_ACTIVE_FILE_PATH @"/var/mobile/Library/Preferences/.carplayuienforced"
 
+#define STATUSBAR_WIDTH 88.0
+
 static CGRect carplay_frame;
 
 static BOOL _carplay_active = NO;
@@ -59,6 +61,14 @@ static inline BOOL carplay_active() { return [[NSFileManager defaultManager] fil
 @end
 
 @interface SMSApplication : UIApplication<UIApplicationDelegate>
+@end
+
+@interface MobilePhoneApplication : UIApplication<UIApplicationDelegate>
+@end
+
+@interface PHStarkManager : NSObject
++ (instancetype)sharedStarkManager;
+- (void)attachStarkToScreen:(UIScreen *)screen;
 @end
 
 @interface CKStarkManager : NSObject
@@ -106,6 +116,18 @@ static inline BOOL carplay_active() { return [[NSFileManager defaultManager] fil
 @end
 
 @interface ABStarkContactsListViewController : UIViewController
+@end
+
+@interface MCDBrowserViewController : UIViewController
+@end
+
+@interface PHStarkRootContainerViewController : UIViewController
+@end
+
+@interface PHStarkMainMenuContainerViewController : UIViewController
+@end
+
+@interface DialerController : UIViewController
 @end
 
 @interface LSApplicationProxy : NSObject

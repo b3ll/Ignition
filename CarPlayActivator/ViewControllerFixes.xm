@@ -115,4 +115,12 @@ FIX_VIEW_CONTROLLER(ABStarkContactViewController)
 
 FIX_VIEW_CONTROLLER(ABStarkContactsListViewController)
 
+FIX_VIEW_CONTROLLER(MCDBrowserViewController)
+
+FIX_VIEW_CONTROLLER(PHStarkRootContainerViewController)
+
+FIX_VIEW_CONTROLLER(PHStarkMainMenuContainerViewController)
+
+FIX_VIEW_CONTROLLER(DialerController)
+
 END_GROUP()
