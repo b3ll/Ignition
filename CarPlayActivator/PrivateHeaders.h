@@ -137,5 +137,8 @@ static inline BOOL carplay_active() { return [[NSFileManager defaultManager] fil
 - (NSString *)applicationIdentifier;
 @end
 
+@interface MessageBarController : NSObject
+@end
+
 #endif
 

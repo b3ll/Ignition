@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0B0181B71A2BA26000048116 /* Tweak.xmi in Sources */ = {isa = PBXBuildFile; fileRef = 0B0181B41A2BA24700048116 /* Tweak.xmi */; };
 		0B97B2261A2CE5300027F7C5 /* CarPlayActivatorPreferences.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0B97B2251A2CE5300027F7C5 /* CarPlayActivatorPreferences.mm */; };
+		669497AB1A3BFD77006ADF4D /* AppFixes.xm in Sources */ = {isa = PBXBuildFile; fileRef = 669497AA1A3BFC4F006ADF4D /* AppFixes.xm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,6 +33,7 @@
 		0B97B2271A2CE5390027F7C5 /* CarPlayActivatorPreferences.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = CarPlayActivatorPreferences.plist; path = CarPlayActivatorPreferences/Resources/CarPlayActivatorPreferences.plist; sourceTree = "<group>"; };
 		0B97B2281A2CE5560027F7C5 /* entry.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = entry.plist; path = CarPlayActivatorPreferences/entry.plist; sourceTree = "<group>"; };
 		0B97B2291A2CE55E0027F7C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = CarPlayActivatorPreferences/Resources/Info.plist; sourceTree = "<group>"; };
+		669497AA1A3BFC4F006ADF4D /* AppFixes.xm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = AppFixes.xm; sourceTree = "<group>"; };
 		66FA8ED91A2C02DA0053DC13 /* substrate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = substrate.h; path = ../../../../../../../../opt/theos/include/substrate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -68,6 +70,7 @@
 				66FA8ED91A2C02DA0053DC13 /* substrate.h */,
 				0B0181B51A2BA25400048116 /* PrivateHeaders.h */,
 				0B0181B41A2BA24700048116 /* Tweak.xmi */,
+				669497AA1A3BFC4F006ADF4D /* AppFixes.xm */,
 				0B0181B61A2BA25400048116 /* ViewControllerFixes.xm */,
 				0B97B2241A2CE51C0027F7C5 /* Preferences Bundle */,
 			);
@@ -168,6 +171,7 @@
 			files = (
 				0B0181B71A2BA26000048116 /* Tweak.xmi in Sources */,
 				0B97B2261A2CE5300027F7C5 /* CarPlayActivatorPreferences.mm in Sources */,
+				669497AB1A3BFD77006ADF4D /* AppFixes.xm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

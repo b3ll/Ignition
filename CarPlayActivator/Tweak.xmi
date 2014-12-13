@@ -16,6 +16,7 @@ CONFIG(generator=MobileSubstrate);
 #import "PrivateHeaders.h"
 
 #include "ViewControllerFixes.xm"
+#include "AppFixes.xm"
 
 // Temporary for now, flipswitch or preferences bundle toggle would make sense in the future.
 #define UIInterfaceIdiomCarPlay 0x3 // Or external display?
@@ -57,7 +58,7 @@ HOOK(UIScreen)
   if (shouldFlipWidth) {
     screenBounds = CGRectMake(screenBounds.origin.x, screenBounds.origin.y, screenBounds.size.height, screenBounds.size.width);
   }
-
+  
   if ([[UIApplication sharedApplication].delegate isKindOfClass:GET_CLASS(MAAppDelegate)] ||
       [[UIApplication sharedApplication].delegate isKindOfClass:GET_CLASS(SMSApplication)] ||
       [[UIApplication sharedApplication].delegate isKindOfClass:GET_CLASS(MobilePhoneApplication)]) {
@@ -140,63 +141,6 @@ HOOK(UIStatusBarWindow)
 - (void)setAlpha:(CGFloat)alpha
 {
   ORIG(0.0);
-}
-
-END()
-
-HOOK(MAAppDelegate)
-
-- (void)_attachToStarkScreen:(UIScreen *)screen
-{
-  ORIG([UIScreen mainScreen]);
-}
-
-- (void)applicationDidFinishLaunching:(UIApplication *)application
-{
-  ORIG();
-  
-  // Remove native App window, since CarPlay one renders underneath it.
-  self.window.hidden = YES;
-  self.window = nil;
-}
-
-END()
-
-HOOK(MobilePhoneApplication)
-
-- (void)applicationDidFinishLaunching:(UIApplication *)application
-{
-  ORIG();
-
-  [[GET_CLASS(PHStarkManager) sharedStarkManager] attachStarkToScreen:[UIScreen mainScreen]];
-
-  // Remove native App window, since CarPlay one renders underneath it.
-  // -window exists in the header, but not actually when the app is running... wtf?
-  UIWindow *window = [self valueForKey:@"_window"];
-  window.hidden = YES;
-  [self setValue:nil forKey:@"_window"];
-}
-
-- (NSUInteger)supportedInterfaceOrientationsForWindow:(UIWindow *)window
-{
-  return UIInterfaceOrientationMaskLandscape;
-}
-
-END()
-
-HOOK(SMSApplication)
-
-- (void)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-  ORIG();
-  
-  [[GET_CLASS(CKStarkManager) sharedInstance] attachStarkToScreen:[UIScreen mainScreen]];
-  
-  // Remove native App window, since CarPlay one renders underneath it.
-  // -window exists in the header, but not actually when the app is running... wtf?
-  UIWindow *window = [self valueForKey:@"_window"];
-  window.hidden = YES;
-  [self setValue:nil forKey:@"_window"];
 }
 
 END()
@@ -306,4 +250,5 @@ CTOR({
   
   INIT(CARPLAY_HAX);
   INIT(VIEWCONTROLLER_FIXES);
+  INIT(APP_FIXES);
 })
