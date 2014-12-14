@@ -1,0 +1,10 @@
+{
+	entry = {
+		bundle = IgnitionPreferences;
+		cell = PSLinkCell;
+		detail = "IgnitionPreferencesListController";
+		icon = "IgnitionPreferences.png";
+		isController = 1;
+		label = Ignition;
+	};
+}

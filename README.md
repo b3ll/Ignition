@@ -1,4 +1,4 @@
-CarPlay Activator
+Ignition
 =============
 
 Negates the need for a "CarPlay supported™" car, and runs the CarPlay UI directly on top of SpringBoard on an iOS device.
@@ -10,13 +10,11 @@ This is meant for *developers-only*, I'm not held liable if you brick SpringBoar
 
 If you do install this and made the mistake of not being a developer who knows what they're doing... ssh into your phone and run this command to uninstall it:
 
-`dpkg -r ca.adambell.carplayactivator`
+`dpkg -r ca.adambell.ignition`
 
 I noted all the bugs I've currently found / noticed so I'll be working on ironing those out over the coming week(s).
 
 Also I'll be sure to do a formal write-up on how it all works once all of this is finished and useable.
-
-Also also CarPlay Activator is an extremely lame codename, so that'll be changing... probably. :)
 
 ![Screenshot1](https://github.com/b3ll/CarPlayActivator/raw/master/Screenshots/Screenshot1@2x.png "CarPlay Activator Screenshot 1")  
 ![Screenshot2](https://github.com/b3ll/CarPlayActivator/raw/master/Screenshots/Screenshot2@2x.png "CarPlay Activator Screenshot 2")  

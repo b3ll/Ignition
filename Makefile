@@ -1,11 +1,11 @@
 all: clean build
 
 clean:
-	xctool -project CarPlayActivator/CarPlayActivatorLauncher/CarPlayActivatorLauncher.xcodeproj -scheme CarPlayActivatorLauncher -sdk iphoneos -configuration Debug clean
-	xctool -project CarPlayActivator.xcodeproj -scheme CarPlayActivator -sdk iphoneos -configuration Debug clean
-	make --directory=CarPlayActivator clean
+	xctool -project Ignition/IgnitionLauncher/IgnitionLauncher.xcodeproj -scheme IgnitionLauncher -sdk iphoneos -configuration Debug clean
+	xctool -project Ignition.xcodeproj -scheme Ignition -sdk iphoneos -configuration Debug clean
+	make --directory=Ignition clean
 
 build:
-	xctool -project CarPlayActivator/CarPlayActivatorLauncher/CarPlayActivatorLauncher.xcodeproj -scheme CarPlayActivatorLauncher -sdk iphoneos -configuration Debug
-	xctool -project CarPlayActivator.xcodeproj -scheme CarPlayActivator -sdk iphoneos -configuration Debug
+	xctool -project Ignition/IgnitionLauncher/IgnitionLauncher.xcodeproj -scheme IgnitionLauncher -sdk iphoneos -configuration Debug
+	xctool -project Ignition.xcodeproj -scheme Ignition -sdk iphoneos -configuration Debug
 
