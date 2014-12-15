@@ -56,3 +56,6 @@ Also if you do make some changes, feel free to make a pull request and help make
 ## Contact Info?
 Feel free to follow me on twitter: [@b3ll](https://www.twitter.com/b3ll)!  
 Though I don't really like to handle support requests there...
+
+## Special Thanks
+[Travis Beckham](http://thenounproject.com/squidfingers) for the vectorized car image!
