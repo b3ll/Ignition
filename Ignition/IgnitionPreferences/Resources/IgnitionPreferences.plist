@@ -16,7 +16,7 @@
 			<key>label</key>
 			<string>View Source on GitHub</string>
 			<key>action</key>
-			<string>openGitHub:</string>
+			<string>openGitHub</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -24,7 +24,7 @@
 			<key>label</key>
 			<string>Donate</string>
 			<key>action</key>
-			<string>openGitHub:</string>
+			<string>openDonate</string>
 		</dict>
 		<dict>
 			<key>cell</key>

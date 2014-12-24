@@ -13,12 +13,12 @@
 	return _specifiers;
 }
 
-- (void)openGitHub:(id)sender
+- (void)openGitHub
 {
   [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.github.com/b3ll/Ignition"]];
 }
 
-- (void)openDonate:(id)sender
+- (void)openDonate
 {
   [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.adambell.ca/donate"]];
 }

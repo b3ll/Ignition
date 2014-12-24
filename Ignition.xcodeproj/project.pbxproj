@@ -25,10 +25,10 @@
 
 /* Begin PBXFileReference section */
 		0B6E4DDE1A2BA12000C51CC9 /* libIgnition.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIgnition.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		669F72FF1A3E4F670099D5CD /* AppFixes.xm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = AppFixes.xm; path = Ignition/AppFixes.xm; sourceTree = SOURCE_ROOT; };
+		669F72FF1A3E4F670099D5CD /* AppFixes.xm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp.preprocessed; fileEncoding = 4; name = AppFixes.xm; path = Ignition/AppFixes.xm; sourceTree = SOURCE_ROOT; };
 		669F73001A3E4F670099D5CD /* PrivateHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrivateHeaders.h; path = Ignition/PrivateHeaders.h; sourceTree = SOURCE_ROOT; };
-		669F73011A3E4F670099D5CD /* Tweak.xmi */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Tweak.xmi; path = Ignition/Tweak.xmi; sourceTree = SOURCE_ROOT; };
-		669F73021A3E4F670099D5CD /* ViewControllerFixes.xm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ViewControllerFixes.xm; path = Ignition/ViewControllerFixes.xm; sourceTree = SOURCE_ROOT; };
+		669F73011A3E4F670099D5CD /* Tweak.xmi */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = Tweak.xmi; path = Ignition/Tweak.xmi; sourceTree = SOURCE_ROOT; };
+		669F73021A3E4F670099D5CD /* ViewControllerFixes.xm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = ViewControllerFixes.xm; path = Ignition/ViewControllerFixes.xm; sourceTree = SOURCE_ROOT; };
 		669F73051A3E4F9B0099D5CD /* entry.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = entry.plist; sourceTree = "<group>"; };
 		669F73061A3E4F9B0099D5CD /* IgnitionPreferences.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = IgnitionPreferences.mm; sourceTree = "<group>"; };
 		669F73091A3E4F9B0099D5CD /* IgnitionPreferences.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = IgnitionPreferences.plist; sourceTree = "<group>"; };

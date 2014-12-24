@@ -1,25 +1,20 @@
 Ignition
 =============
 
-Negates the need for a "CarPlay supported™" car, and runs the CarPlay UI directly on top of SpringBoard on an iOS device.
+Negates the need for a "CarPlay supported™" car, and runs the CarPlay UI directly on top of SpringBoard on an iOS device. 
 
-**Notice:**  
-This is **extremely** buggy and unfinished at the moment. I'm only releasing this now for documentation purposes and to see if anyone else wants to help finish this faster than I can. ;)
+Works great for iPads mounted on the dash!
 
-This is meant for *developers-only*, I'm not held liable if you brick SpringBoard, so please don't share any compiled debs at the moment! :)
+**Note**: This is primarily meant for an iPad, and iPhones aren't really supported (however you "can" use it with an iPhone 6 Plus if you really want to).
 
-If you do install this and made the mistake of not being a developer who knows what they're doing... ssh into your phone and run this command to uninstall it:
+Also, I'll be sure to do a formal write-up on how it all works once all of this is finished and useable.
 
-`dpkg -r ca.adambell.ignition`
+Vroom vroom.
 
-I noted all the bugs I've currently found / noticed so I'll be working on ironing those out over the coming week(s).
-
-Also I'll be sure to do a formal write-up on how it all works once all of this is finished and useable.
-
-![Screenshot1](https://github.com/b3ll/CarPlayActivator/raw/master/Screenshots/Screenshot1@2x.png "CarPlay Activator Screenshot 1")  
-![Screenshot2](https://github.com/b3ll/CarPlayActivator/raw/master/Screenshots/Screenshot2@2x.png "CarPlay Activator Screenshot 2")  
-![Screenshot3](https://github.com/b3ll/CarPlayActivator/raw/master/Screenshots/Screenshot3@2x.png "CarPlay Activator Screenshot 3")  
-![Screenshot4](https://github.com/b3ll/CarPlayActivator/raw/master/Screenshots/Screenshot4@2x.png "CarPlay Activator Screenshot 4")  
+![Screenshot1](https://github.com/b3ll/Ignition/raw/master/Screenshots/Screenshot1-compressed@2x.png "Ignition Screenshot 1")  
+![Screenshot2](https://github.com/b3ll/Ignition/raw/master/Screenshots/Screenshot2-compressed@2x.png "Ignition Screenshot 2")  
+![Screenshot3](https://github.com/b3ll/Ignition/raw/master/Screenshots/Screenshot3-compressed@2x.png "Ignition Screenshot 3")  
+![Screenshot4](https://github.com/b3ll/Ignition/raw/master/Screenshots/Screenshot4-compressed@2x.png "Ignition Screenshot 4")  
 
 ## Explanation
 To be honest a lot of this nonsense could be completely avoided if a secondary "fake" FBSDisplay could be created and then used. That way SBApplications could create / own proper carScenes and there'd be a lot less things that were broken...
