@@ -8,19 +8,31 @@
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>Ignition</string>
+			<string>About</string>
 		</dict>
 		<dict>
 			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<true/>
-			<key>defaults</key>
-			<string>ca.adambell.ignition</string>
-			<key>key</key>
-			<string>reverseOrientation</string>
+			<string>PSButtonCell</string>
 			<key>label</key>
-			<string>Reverse Orientation</string>
+			<string>View Source on GitHub</string>
+			<key>action</key>
+			<string>openGitHub:</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>label</key>
+			<string>Donate</string>
+			<key>action</key>
+			<string>openGitHub:</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>height</key>
+			<string>20</string>
+			<key>footerText</key>
+			<string>© 2015 Adam Bell</string>
 		</dict>
 	</array>
 	<key>title</key>

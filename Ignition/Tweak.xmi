@@ -194,7 +194,7 @@ HOOK(LSApplicationProxy)
 
 - (NSDictionary *)entitlements
 {
-  if ([[self applicationIdentifier] isEqualToString:@"ca.adambell.CarPlayActivatorLauncher"]) {
+  if ([[self applicationIdentifier] isEqualToString:@"ca.adambell.IgnitionLauncher"]) {
     return @{
              @"SBStarkCapable" : @YES,
              @"com.apple.developer.playable-content" : @YES

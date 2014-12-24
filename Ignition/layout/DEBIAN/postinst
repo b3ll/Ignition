@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Force SpringBoard to reindex icon cache
+echo "Rebuilding SpringBoard cache... hang tight!"
+uicache -c
+echo "Vroom Vroom. Gotta go fast!"
+echo "Done."

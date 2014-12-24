@@ -1,10 +1,10 @@
 include /opt/theos/makefiles/common.mk
 
 BUNDLE_NAME = IgnitionPreferences
-CarPlayActivatorPreferences_FILES = IgnitionPreferences.mm
-CarPlayActivatorPreferences_INSTALL_PATH = /Library/PreferenceBundles
-CarPlayActivatorPreferences_FRAMEWORKS = UIKit
-CarPlayActivatorPreferences_PRIVATE_FRAMEWORKS = Preferences
+IgnitionPreferences_FILES = IgnitionPreferences.mm
+IgnitionPreferences_INSTALL_PATH = /Library/PreferenceBundles
+IgnitionPreferences_FRAMEWORKS = UIKit
+IgnitionPreferences_PRIVATE_FRAMEWORKS = Preferences
 
 include $(THEOS_MAKE_PATH)/bundle.mk
 
