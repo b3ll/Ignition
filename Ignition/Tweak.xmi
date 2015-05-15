@@ -194,14 +194,26 @@ HOOK(LSApplicationProxy)
 
 - (NSDictionary *)entitlements
 {
-  if ([[self applicationIdentifier] isEqualToString:@"ca.adambell.IgnitionLauncher"]) {
-    return @{
-             @"SBStarkCapable" : @YES,
-             @"com.apple.developer.playable-content" : @YES
-             };
+  // Only include @"com.apple.developer.playable-content" : @YES if the app actually supports it, it's meant for music apps and overrides the primary window.
+
+  static NSArray *allowedApplicationIdentifiers = @[
+                                                    @"ca.adambell.IgnitionLauncher",
+                                                    @"com.steventroughtonsmith.speed2",
+                                                    @"com.apple.Preferences",
+                                                    @"com.google.Maps",
+                                                    @"com.waze.iphone",
+                                                    @"com.soundcloud.TouchApp",
+                                                    @"com.facebook.Messenger",
+                                                    ];
+  NSDictionary *entitlements = ORIG();
+  
+  if ([allowedApplicationIdentifiers containsObject:self.applicationIdentifier]) {
+    NSMutableDictionary *newEntitlements = [entitlements mutableCopy];
+    newEntitlements[@"SBStarkCapable"] = @YES;
+    entitlements = [newEntitlements copy];
   }
   
-  return ORIG();
+  return entitlements;
 }
 
 END()

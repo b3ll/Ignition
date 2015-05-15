@@ -1,6 +1,6 @@
 Package: ca.adambell.ignition
 Name: Ignition
-Depends: mobilesubstrate, firmware (>= 8.0)
+Depends: mobilesubstrate, firmware (>= 8.0), gsc.assistant
 Version: 0.0.1
 Architecture: iphoneos-arm
 Description: Enables Native CarPlay Interface on any iOS Device (8.X).

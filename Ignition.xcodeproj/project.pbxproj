@@ -33,7 +33,7 @@
 		669F73061A3E4F9B0099D5CD /* IgnitionPreferences.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = IgnitionPreferences.mm; sourceTree = "<group>"; };
 		669F73091A3E4F9B0099D5CD /* IgnitionPreferences.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = IgnitionPreferences.plist; sourceTree = "<group>"; };
 		669F730A1A3E4F9B0099D5CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		66FA8ED91A2C02DA0053DC13 /* substrate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = substrate.h; path = ../../../../../../../../opt/theos/include/substrate.h; sourceTree = "<group>"; };
+		66FA8ED91A2C02DA0053DC13 /* substrate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = substrate.h; path = /opt/theos/include/substrate.h; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
