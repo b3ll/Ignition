@@ -2,6 +2,8 @@
 #
 .theos
 *.deb
+Packages/
+layout/
 
 # Xcode
 #
@@ -21,3 +23,7 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
+
+CarPlayActivator/carplaylauncher/theos
+
+CarPlayActivator/carplaylauncher/libflipswitch.dylib
